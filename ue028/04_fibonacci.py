@@ -5,7 +5,7 @@ ausgibt!
 Benutze dabei eine for-Schleife.
 """
 
-v1 = 0  # erster Vorgänger
+v1 = 1  # erster Vorgänger
 v2 = 1  # zweiter Vorgänger
 count = 0  # Anzahl Durchgänge
 
@@ -19,7 +19,7 @@ while count < 10:
 
 print("========== for ============")
 
-v1 = 0
+v1 = 1
 v2 = 1
 
 for i in range(10):
