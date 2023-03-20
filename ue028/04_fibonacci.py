@@ -16,3 +16,14 @@ while count < 10:
     v1 = v2
     v2 = z
     count += 1
+
+print("========== for ============")
+
+v1 = 0
+v2 = 1
+
+for i in range(10):
+    print(v1)
+    z = v1 + v2
+    v1 = v2
+    v2 = z
