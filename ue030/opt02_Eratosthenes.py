@@ -1,5 +1,7 @@
-# import math
 from math import sqrt
+import datetime as dt
+
+startzeit = dt.datetime.now()
 
 # ? Bis zu welcher Obergrenze sollen die Primzahlen gesiebt werden?
 BIS = 10000
@@ -24,4 +26,7 @@ for i in range(2, int(sqrt(BIS))):
 for i in range(int(sqrt(BIS)+1), BIS):
     if not gestrichen[i]:
         print(i, end=", ")
-print("ENDE")
+print("\nENDE\n")
+endzeit = dt.datetime.now()
+diff = endzeit - startzeit
+print(f"Laufzeit: {diff}")
