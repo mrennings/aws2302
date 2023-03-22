@@ -22,11 +22,12 @@ for i in range(2, int(sqrt(BIS))):
         for j in range(i*i, BIS, i):
             gestrichen[j] = True
 
-# Primzahlen ab Wurzel(BIS) ausgeben
+# * Primzahlen ab Wurzel(BIS) ausgeben
 for i in range(int(sqrt(BIS)+1), BIS):
     if not gestrichen[i]:
         print(i, end=", ")
 print("\nENDE\n")
+
 endzeit = dt.datetime.now()
 diff = endzeit - startzeit
 print(f"Laufzeit: {diff}")
