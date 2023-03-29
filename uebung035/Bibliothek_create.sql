@@ -29,7 +29,8 @@ CREATE TABLE Bibliothek.Verleihdaten(Vorgangsnummer INT NOT NULL PRIMARY KEY,
 	ISBN BIGINT NOT NULL,
 	Ausgeliehen boolean NOT NULL DEFAULT false,
 	Kundennummer INT NOT NULL,
-	FOREIGN KEY (Kundennummer) REFERENCES Kunde(Kundennummer)
+	FOREIGN KEY (Kundennummer) REFERENCES Kunde(Kundennummer),
+    FOREIGN KEY (ISBN) REFERENCES Buch(ISBN)
 );	
 
 
