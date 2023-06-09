@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <title>Aufgabe 1</title>
+</head>
+<body>
+    <form action="/submit.js" method="post" autocomplete="on">
+        <label for="name">Name: </label>
+        <input type="text" id="i_name" name="name">
+        <br />
+        <label for="rot">Rot</label>
+        <input type="radio" name="radio" id="r_rot" value="rot">
+        <label for="blau">Blau</label>
+        <input type="radio" name="radio" id="r_blau" value="blau">
+        <label for="gruen">Grün</label>
+        <input type="radio" name="radio" id="r_gruen" value="gruen">
+        <br />
+        <label for="ddown">Land:</label>
+        <select name="dropdown" id="ddown">
+            <option value="deutschland">Deutschland</option>
+            <option value="frankreich">Frankreich</option>
+            <option value="spanien">Spanien</option>
+        </select>
+        <br />
+        <input type="hidden" name="hidden" id="i_hidden" value="0112358132134">
+        <input type="submit" value="Absenden" id="submit">
+        <input type="reset" value="Zurücksetzen" id="reset">
+    </form>
+</body>
+</html>

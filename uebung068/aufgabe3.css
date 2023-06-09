@@ -1,0 +1,28 @@
+body {
+    background-color: gray;
+}
+
+ul {
+    line-height: 1.5;
+}
+
+a {
+    color: rgb(0,0,255);
+}
+
+a:visited {
+    color: darkgreen;
+    text-decoration: line-through;
+}
+
+a:hover {
+    color: yellow;
+    text-decoration: wavy underline greenyellow;
+    background-color: black;
+}
+
+a:active {
+    color: hotpink;
+    text-decoration: wavy underline overline;
+    
+}
