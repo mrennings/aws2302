@@ -1,0 +1,11 @@
+{
+  "name": "aufgabe2",
+  "version": "1.0.0",
+  "description": "Übung 077, Aufgabe 2",
+  "main": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Markus Rennings",
+  "license": "ISC"
+}
