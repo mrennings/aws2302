@@ -79,12 +79,11 @@ app.get('/formdata', function (req, res) {
 app.post('/formdata', (req, res) => {
     console.log(`Formulardaten: Name: ${req.body.name}, Alter: ${req.body.age}`);
     console.log(req.body);
-    console.log(`Formdata: ${req.body.toString()}`);     // ! funktioniert nicht!
+    console.log(`Formdata: ${req.body}`);     // ! funktioniert nicht!
     console.log("Mit plus " + req.body);      // ! funktioniert auch nicht!
     console.log(`JSON: ${JSON.stringify(req.body)}`);
     res.send("Daten erfolgreich übertragen.");
-    //process.stdout.write(req.body);
-})
+});
 
 app.listen(port, hostname, () => {
     console.log(`Server up and listening on ${hostname}:${port}…`);
