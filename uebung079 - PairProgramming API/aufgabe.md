@@ -45,7 +45,7 @@ du das Restaurant hinzufügst.
 mit dem angegebenen Namen existiert. Wenn ja, sende das Restaurant-Objekt an den
 Client zurück.
 - Beim Implementieren des PUT-Endpunkts solltest du überprüfen, ob das zu
-aktualisierende Restaurant mit dem angegebenen Namen vorhanden ist. Wenn ja, 
+aktualisierende Restaurant mit dem angegebenen Namen vorhanden ist. Wenn ja,
 ersetze das vorhandene Restaurant-Objekt durch das neue und sende das aktualisierte Restaurant-Objekt an den Client zurück.
 - Für den DELETE-Endpunkt überprüfe, ob das zu löschende Restaurant vorhanden ist,
 bevor du es löschst.
