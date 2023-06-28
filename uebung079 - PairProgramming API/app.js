@@ -64,7 +64,10 @@ function getIndex(name) {
 
 function delRestaurant(name) {
     const index = getIndex(name);
-    let deleted = restaurants.splice(index,1);
+    let deleted = undefined;
+    if (index != -1) {
+        deleted = restaurants.splice(index,1);
+    }
     return deleted;
 }
 
@@ -115,13 +118,13 @@ app.get('/restaurant/:name', (req, res) => {
 
 // * Restaurant aktualisieren
 app.put('/restaurant/:name', (req, res) => {
-    if ( getIndex(req.params.name) != -1) {
+    const name = req.params.name;
+    if ( getIndex(name) != -1) {
         const r = req.body;
         if ( r.name && r.adresse && r.kategorie) {
-            delRestaurant(r.name);
+            delRestaurant(name);
             createRestaurant(r)
-            // TODO (löschen & neu einfügen?)
-            res.send(r); // TODO neues Restaurant zurückgeben */
+            res.send(r);
             console.log(`Aktualisiere: ${req.params.name}: ${r.name}, ${r.adresse}, ${r.kategorie}.`);
         } else {
             res.status(400);
@@ -135,7 +138,16 @@ app.put('/restaurant/:name', (req, res) => {
 
 // * Restaurant löschen
 app.delete('/restaurant/:name', (req,res) => {
-    // TODO: delRestaurant(name)
+    const name = req.params.name;
+
+    if (getIndex(name) != -1) {
+        const deleted = delRestaurant(name);
+        res.send(deleted);
+        console.log(`${name} gelöscht: ${JSON.stringify(deleted)}`);
+    } else {
+        res.status(404);
+        res.send(`Restaurant »${name}« nicht gefunden.`);
+    }
 });
 
 
