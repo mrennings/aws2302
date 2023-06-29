@@ -136,14 +136,6 @@ app.delete('/restaurant/:name', (req,res) => {
         res.status(404)
         res.send(`${name} nicht gelöscht – nicht in der Datenbank?`);
     }
-
-    // if (exists(name)) {
-    //     db.run(`DELETE FROM restaurants WHERE name = '${name}'`);
-    //     res.send(`${name} gelöscht.`)
-    // } else {
-    //     res.status(404);
-    //     res.send(`${name} ist nicht in der Datenbank`);
-    // }
 });
 
 
