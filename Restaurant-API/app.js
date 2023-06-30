@@ -35,8 +35,9 @@ const db = require('better-sqlite3')('restaurants.db', { verbose: console.info }
 
 
 const exists = (name) => {
-    const stmt = db.prepare(`SELECT * FROM restaurants WHERE name = '${name}';`);
-    return stmt.all().length != 0;
+    //const stmt = db.prepare(`SELECT * FROM restaurants WHERE name = '${name}';`);
+    const stmt = db.prepare("SELECT * FROM restaurants WHERE name = ?;");
+    return stmt.all(name).length != 0;
 }
 
  //TODO testen
@@ -152,4 +153,6 @@ process.on('SIGINT', () => {
     exit(15);
 });
 
-process.on('SIGHUP'), () => { exit(1); }
+process.on('SIGHUP', () => { 
+    exit(1);
+});
