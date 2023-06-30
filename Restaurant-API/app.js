@@ -35,7 +35,6 @@ const db = require('better-sqlite3')('restaurants.db', { verbose: console.info }
 
 
 const exists = (name) => {
-    //const stmt = db.prepare(`SELECT * FROM restaurants WHERE name = '${name}';`);
     const stmt = db.prepare("SELECT * FROM restaurants WHERE name = ?;");
     return stmt.all(name).length != 0;
 }
