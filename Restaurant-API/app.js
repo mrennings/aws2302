@@ -1,9 +1,11 @@
-function exit(ret=0) {
+function exit(ret=255) {
     db.close();
     process.exit(ret);
     /*
-     !  1 Datenbank-Table nicht erstellt
-     ! 15 SIGINT
+     !   1 SIGHUP
+     !  15 SIGINT
+     ! 129 Datenbank-Table nicht erstellt
+     ! 255 Unknown error
     */
 }
 
@@ -27,7 +29,7 @@ const db = require('better-sqlite3')('restaurants.db', { verbose: console.info }
     console.log("Tabelle erstellt oder existiert bereits.");
 } else {
     console.error("Konnte Datenbank nicht erstellen, beende …")
-    exit(1);
+    exit(129);
 }
 
 
@@ -42,18 +44,21 @@ function delRestaurant(name) {
     let deleted = undefined;
 
     if (exists(name)) {
-        const stmt = db.prepare(`SELECT * FROM restaurants WHERE name = '${name}';`);
-        deleted = stmt.all();
-        db.exec(`DELETE FROM restaurants WHERE name = '${name}';`);
+        deleted = db.prepare("SELECT * FROM restaurants WHERE name = ?;").get(name);
+        db.prepare("DELETE FROM restaurants WHERE name = ?;").run(name);
     } 
     return deleted;
 }
 
 //TODO testen
+/*
+ ? return positiv interger:  number of changes
+ ? return -1                 no changes
+ */
 function createRestaurant(name, adresse, kategorie) {
     if (!exists(name)) {
-        const stmt = db.prepare(`INSERT INTO restaurants (name, adresse, kategorie) VALUES ('${name}', '${adresse}', '${kategorie}');`);
-        const result = stmt.run();
+        const stmt = db.prepare("INSERT INTO restaurants (name, adresse, kategorie) VALUES (?, ?, ?);");
+        const result = stmt.run([name, adresse, kategorie]);
         return result.changes;
     } else {
         return -1;
@@ -62,8 +67,7 @@ function createRestaurant(name, adresse, kategorie) {
 
 // * Liste aller Restaurants
 app.get('/restaurants', (_, res) => {
-    const stmt = db.prepare("SELECT * from restaurants;");
-    res.send(stmt.all());
+    res.send(db.prepare("SELECT * from restaurants;").all());
 });
 
 // TODO testen
@@ -90,16 +94,16 @@ app.post('/restaurant', (req,res) => {
 // * Einzelnes Restaurant abfragen
 app.get('/restaurant/:name', (req, res) => {
 
-    const stmt = db.prepare(`SELECT * FROM restaurants WHERE name = '${req.params.name}';`);
-    const result = stmt.all();
+    const name = req.params.name;
+    const result = db.prepare("SELECT * FROM restaurants WHERE name = ?;").get(name);
 
-    if (result.length != 0) {
+    if (result) {
         console.log(result);
         res.send(result);
     } else {
-        console.log(`Restaurant »${req.params.name}« existiert nicht`);
+        console.log(`Restaurant »${name}« existiert nicht`);
         res.status(404)
-        res.send(`Restaurant »${req.params.name}« existiert nicht`);
+        res.send(`Restaurant »${name}« existiert nicht`);
     }
 });
 
@@ -147,3 +151,5 @@ process.on('SIGINT', () => {
     console.log("SIGINT received …");
     exit(15);
 });
+
+process.on('SIGHUP'), () => { exit(1); }
