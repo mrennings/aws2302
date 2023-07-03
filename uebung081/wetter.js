@@ -12,22 +12,22 @@ const {cred} = require('./OWM.cred');
 const URL = `http://api.openweathermap.org/data/2.5/weather?q=${stadt}&APPID=${cred.api_key}&units=metric&lang=de`;
 
 const richtung = {
-     0: "Norden",
-     1: "Nordnordosten",
-     2: "Nordosten",
-     3: "Ostnordosten",
-     4: "Osten",
-     5: "Ostsüdosten",
-     6: "Südosten",
-     7: "Südsüdosten",
-     8: "Süden",
-     9: "Südsüdwesten",
-    10: "Südwesten",
-    11: "Westsüdwesten",
-    12: "Westen",
-    13: "Westnordwesten",
-    14: "Nordwesten",
-    15: "Nordnordwesten"
+     0: "Nord",
+     1: "Nordnordost",
+     2: "Nordost",
+     3: "Ostnordost",
+     4: "Ost",
+     5: "Ostsüdost",
+     6: "Südost",
+     7: "Südsüdost",
+     8: "Süd",
+     9: "Südsüdwest",
+    10: "Südwest",
+    11: "Westsüdwest",
+    12: "West",
+    13: "Westnordwest",
+    14: "Nordwest",
+    15: "Nordnordwest"
 };
 
 function parseResponse(r) {
