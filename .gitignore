@@ -2,4 +2,6 @@
 *~
 *.swp
 *.bak
+*.pem
+*.cred
 node_modules/

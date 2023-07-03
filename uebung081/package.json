@@ -1,0 +1,14 @@
+{
+  "name": "uebung081",
+  "version": "1.0.0",
+  "description": "Übung 080 – Aufgabe 2",
+  "main": "wetter.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Markus Rennings",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.4.0"
+  }
+}
