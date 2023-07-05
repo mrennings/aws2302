@@ -2,9 +2,9 @@ function exit(ret=255) {
     db.close();
     process.exit(ret);
     /*
-     !   1 SIGHUP
-     !  15 SIGINT
-     ! 129 Datenbank-Table nicht erstellt
+     !   1 Datenbank-Table nicht erstellt
+     ! 129 SIGHUP
+     ! 143 SIGINT
      ! 255 Unknown error
     */
 }
@@ -13,6 +13,7 @@ function exit(ret=255) {
 const express = require('express');
 const app = express();
 app.use(express.json());
+app.use(express.static(__dirname + '/assets'));
 const port = 3000;
 const hostname = "localhost";
 
@@ -29,7 +30,7 @@ const db = require('better-sqlite3')('restaurants.db', { verbose: console.info }
     console.log("Tabelle erstellt oder existiert bereits.");
 } else {
     console.error("Konnte Datenbank nicht erstellen, beende …")
-    exit(129);
+    exit(1);
 }
 
 
@@ -70,7 +71,7 @@ app.get('/restaurants', (_, res) => {
     res.send(db.prepare("SELECT * from restaurants;").all());
 });
 
-// TODO testen
+
 // * Restaurant hinzufügen
 app.post('/restaurant', (req,res) => {
     const r = req.body;
@@ -78,16 +79,16 @@ app.post('/restaurant', (req,res) => {
         if ( ! exists(r.name)) {
             if (createRestaurant(r.name, r.adresse, r.kategorie) != -1) {
                 res.status(201);
-                res.send(`Restaurant ${r.name} hinzugefügt`);
+                res.send({"message": "Restaurant hinzugefügt" + r.name});
                 console.log(`Restaurant hinzugefügt: ${r.name}, ${r.adresse}, ${r.kategorie}.`)
             }
         } else {
             res.status(418);
-            res.send("Restaurant ist bereits in der Datenbank.");
+            res.send({"message": "Restaurant ist bereits in der Datenbank."});
         }
     } else {
         res.status(400);
-        res.send("Daten unvollständig");
+        res.send({"message": "Daten unvollständig"});
     }
 });
 
@@ -103,11 +104,11 @@ app.get('/restaurant/:name', (req, res) => {
     } else {
         console.log(`Restaurant »${name}« existiert nicht`);
         res.status(404)
-        res.send(`Restaurant »${name}« existiert nicht`);
+        res.send({"message": `Restaurant »${name}« existiert nicht`});
     }
 });
 
-// TODO testen
+
 // * Restaurant aktualisieren
 app.put('/restaurant/:name', (req, res) => {
     const name = req.params.name;
@@ -120,25 +121,25 @@ app.put('/restaurant/:name', (req, res) => {
             console.log(`Aktualisiere: ${req.params.name}: ${r.name}, ${r.adresse}, ${r.kategorie}.`);
         } else {
             res.status(400);
-            res.send("Daten unvollständig, nicht aktualisiert.");
+            res.send({"message": "Daten unvollständig, nicht aktualisiert."});
         }
     } else {
         res.status(404);
-        res.send("Restaurant nicht gefunden.")
+        res.send({"message": "Restaurant nicht gefunden."})
     }
 });
 
-// TODO testen
+
 // * Restaurant löschen
 app.delete('/restaurant/:name', (req,res) => {
     const name = req.params.name;
 
     const deleted = delRestaurant(name);
     if (deleted) {
-        res.send(`${name} gelöscht`);
+        res.send({"message:": `${name} gelöscht`});
     } else {
         res.status(404)
-        res.send(`${name} nicht gelöscht – nicht in der Datenbank?`);
+        res.send({"message": `${name} nicht gelöscht – nicht in der Datenbank?`});
     }
 });
 
@@ -149,9 +150,9 @@ app.listen(port, hostname, () => {
 
 process.on('SIGINT', () => {
     console.log("SIGINT received …");
-    exit(15);
+    exit(143);
 });
 
 process.on('SIGHUP', () => { 
-    exit(1);
+    exit(129);
 });
