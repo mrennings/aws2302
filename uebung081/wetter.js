@@ -31,7 +31,8 @@ const richtung = {
 };
 
 function parseResponse(r) {
-    // TODO Windrichtung in Himmelsrichtung anzeigen
+    // ~~TODO~~ Windrichtung in Himmelsrichtung anzeigen
+    // https://community.smarthome-for-dummies.de/viewtopic.php?t=438
     const dir = parseInt((r.wind.deg + 11.5) / 22.5);
     // TODO Sichtweite: Max-Wert 10000m
     // ! Timestamps: es werden nur 10 Stellen angegeben, nicht 13 (Sek statt ms)
