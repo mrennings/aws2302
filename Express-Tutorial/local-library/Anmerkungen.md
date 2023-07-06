@@ -7,6 +7,7 @@ grep -R "var " * | wc - l
 
 ```
 
+***
 
 `pug` muss nachinstalliert werden:
 
@@ -14,8 +15,16 @@ grep -R "var " * | wc - l
 npm install pug
 ```
 
+***
+
 ```bash
 express --view=pugs --css=css local-library
 ```
 **s** zuviel bei pug**s**
+
+***
+
+Deutsche Version lässt einiges an Erklärungen aus.
+
+***
 
