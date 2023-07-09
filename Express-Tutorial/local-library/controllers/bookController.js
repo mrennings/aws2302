@@ -174,7 +174,7 @@ exports.book_delete_get = asyncHandler(async (req, res, next) => {
     });
 });
 
-// TODO
+
 // Handle Book delete on POST.
 exports.book_delete_post = asyncHandler(async (req, res, next) => {
     // Get details of book and all their instances (in parallel)
