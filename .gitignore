@@ -4,4 +4,5 @@
 *.bak
 *.pem
 *.cred
+.env
 node_modules/
