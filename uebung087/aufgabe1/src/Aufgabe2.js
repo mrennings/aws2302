@@ -22,21 +22,11 @@ export function Uhrzeit() {
         const timer = setInterval(() => {
             setTime(new Date())
         }, 1000);
-         return () => {
-      clearInterval(timer);
-    };
+        return () => {
+            clearInterval(timer);
+        };
     });
 
 
     return <p  className="uhrzeit" >{time.toLocaleTimeString()}</p>
-}
-
-export function Uhrzeit1() {
-    const [ time, setTime ] = useState(Date.now);
-
-    useEffect(() => {
-
-    });
-
-    return <p className="uhrzeit">{time}</p>
 }
