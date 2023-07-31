@@ -13,3 +13,11 @@ Gegeben ist die im Anhang aufgeführte HTML Seite (HTML+CSS). Die Aufgabe besteh
 - Lösche ggfs. die App.* Dateien und die entsprechenden Referenzen dazu aus der Datei index.js.
 - Binde die neu erstellten Komponenten in die index.js Datei ein, sodass diese gerendert werden.
 - Öffne die Webseite im Browser und mache einen Screenshot für die Abgabe.
+
+# Aufgabe 2
+
+Füge der Webseite von Aufgabe 1 dynamische Komponenten hinzu und platziere sie sinnvoll auf der Webseite. Mache erneut einen Screenshot für die Abgabe.
+
+1. Erstelle einen Counter, welcher über einen Button erhöht werden kann. Jedes Mal, wenn der Button geklickt wird, soll sich der Zähler um 2 erhöhen.
+
+2. Erstelle ein Uhrzeit-Widget, welches die aktuelle Uhrzeit im Format HH:MM:SS wiedergibt. Die Anzeige soll sich jede Sekunde aktualisieren.
