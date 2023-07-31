@@ -33,3 +33,12 @@ footer {
     text-align: center;
     padding: 1rem;
 }
+
+.uhrzeit {
+    text-align: right;
+    padding-right: 1rem;
+}
+
+.counter {
+    padding-left: 2rem;
+}
