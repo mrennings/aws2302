@@ -67,6 +67,7 @@ export default function Todolist() {
         <ul>
             <Todos />
         </ul>
+        <button onClick={() => addTodo([])}>Alle löschen</button>
         </>
     );
 }
