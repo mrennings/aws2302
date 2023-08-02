@@ -1,0 +1,35 @@
+.App {
+  /* text-align: center; */
+  padding: 25px;
+  /* font-family: Raleway; */
+}
+
+.App-header {
+  /* background-color: #292727; */
+  background-color: #7ebe3f;
+  min-height: 10vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: #faf4f4;
+  font-family: Raleway;
+  font-weight: 700;
+}
+
+.App-link {
+  color: #7ebe3f;
+}
+
+li.todo-entry {
+  list-style: none;
+}
+
+main {
+  padding-top: 1em;
+}
+
+.done {
+  text-decoration: line-through;
+}
