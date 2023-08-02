@@ -4,19 +4,14 @@ import React, { useState } from "react";
 export default function Todolist() {
     // let tasks = [];
     const [ todos, addTodo ] = useState([]);
-    const [ task, setTask ] = useState('');
-    
-    const taskEingabe = (event) => {
-        // * Jede Zeicheneingabe im Formularfeld verarbeiten
-        setTask(event.target.value);
-    };
+    const [ input, setInput ] = useState('');
 
     const addTask = () => {
         // * Neuen Task der Liste hinzufügen
         const inp = document.getElementById("inp_task");
         if (inp.value !== "") {
             addTodo( [...todos, {id: Date.now(), task: inp.value, done: false} ] );
-            setTask("");
+            setInput("");
         }
     };
 
@@ -59,8 +54,8 @@ export default function Todolist() {
         <input type='text'
                 name="inp_task"
                 id="inp_task"
-                value={task}
-                onChange={taskEingabe}
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
                 placeholder="Aufgabe eingeben …"
         />
         <button name="btn_enterTask"
