@@ -4,7 +4,15 @@
 *.bak
 *.pem
 *.cred
+*.png
+*.log
+*.old
+*.db
 .env
+.vscode
 node_modules/
 ts-test/
 /202*/
+Express-Tutorial/
+uebung090/
+uebung106/

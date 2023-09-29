@@ -3,8 +3,8 @@ import Nachricht from './components/Nachricht';
 
 
 function App() {
-    
-    
+
+
     return (
         <div>
             <Nachricht />
@@ -13,3 +13,4 @@ function App() {
 }
 
 export default App;
+
