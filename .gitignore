@@ -16,3 +16,6 @@ ts-test/
 Express-Tutorial/
 uebung090/
 uebung106/
+.terraform/
+*.tfstate
+*.tfstate.*

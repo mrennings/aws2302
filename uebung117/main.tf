@@ -117,13 +117,32 @@ resource "aws_security_group" "sg" {
 }
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance
+
 resource "aws_instance" "test" {
+  for_each = {
+    "a" = aws_subnet.subnet_a.id
+    "b" = aws_subnet.subnet_b.id
+    "c" = aws_subnet.subnet_c.id
+  }
+
   ami                    = "ami-065ab11fbd3d0323d"
   instance_type          = "t2.micro"
-  subnet_id              = aws_subnet.subnet_c.id
+  subnet_id              = each.value
   vpc_security_group_ids = [aws_security_group.sg.id]
   key_name               = "aws_mr"
   tags                   = {
-    Name = "HA 117"
+    Name = "HA 117 ${each.key}"
   }
 }
+
+  
+# resource "aws_instance" "test" {
+#   ami                    = "ami-065ab11fbd3d0323d"
+#   instance_type          = "t2.micro"
+#   subnet_id              = aws_subnet.subnet_c.id
+#   vpc_security_group_ids = [aws_security_group.sg.id]
+#   key_name               = "aws_mr"
+#   tags                   = {
+#     Name = "HA 117"
+#   }
+# }
