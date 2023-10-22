@@ -12,3 +12,11 @@ variable "public_subnet_cidr" {
   description = "CIDRs for public subnets"
   type        = list(string)
 }
+
+variable "image_id" {
+  
+}
+
+variable "instance_type" {
+  
+}

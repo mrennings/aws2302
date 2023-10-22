@@ -33,10 +33,3 @@ resource "aws_lb_listener" "frontend" {
     target_group_arn = aws_lb_target_group.target_group.arn
   }
 }
-
-resource "aws_lb_target_group_attachment" "instances" {
-  count = length(var.availability_zones)
-  target_group_arn = aws_lb_target_group.target_group.arn
-  target_id = aws_instance.ec2s[count.index].id
-  port = 80
-}
