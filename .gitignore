@@ -8,6 +8,7 @@
 *.log
 *.old
 *.db
+*.zip
 .env
 .vscode
 node_modules/
