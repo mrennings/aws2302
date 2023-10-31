@@ -31,10 +31,14 @@
     - name: Start web server
       ansible.builtin.service:
         name: "httpd"
-        state: started
+        state: restarted
+        enabled: true
       become: true
     - name: Copy Web files
       ansible.builtin.copy:
         dest: /var/www/html/
         src:  "./files/index.html"
+        owner: "apache"
+        group: "apache"
+        mode: 0664
       become: true
