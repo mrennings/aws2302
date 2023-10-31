@@ -1,0 +1,40 @@
+---
+- name: Intro to Ansible Playbooks
+  hosts: all
+
+  tasks:
+    - name: Add the user 'foo'
+      ansible.builtin.user:
+        name: foo
+      become: true
+      become_method: ansible.builtin.sudo
+
+    - name: Upgrade all packages
+      ansible.builtin.yum:
+        name: "*"
+        state: latest
+      become: true
+
+    - name: Install editors
+      ansible.builtin.yum:
+        name:
+          - vim
+          - nano
+        state: latest
+      become: true
+
+    - name: Install web server
+      ansible.builtin.dnf:
+        name: "httpd"
+        state: present
+      become: true
+    - name: Start web server
+      ansible.builtin.service:
+        name: "httpd"
+        state: started
+      become: true
+    - name: Copy Web files
+      ansible.builtin.copy:
+        dest: /var/www/html/
+        src:  "./files/index.html"
+      become: true
