@@ -12,7 +12,7 @@
     - name: Upgrade all packages
       ansible.builtin.yum:
         name: "*"
-        state: latest
+        state: latest # noqa package-latest
       become: true
 
     - name: Install editors
@@ -20,7 +20,7 @@
         name:
           - vim
           - nano
-        state: latest
+        state: latest # noqa package-latest
       become: true
 
     - name: Install web server
@@ -37,8 +37,8 @@
     - name: Copy Web files
       ansible.builtin.copy:
         dest: /var/www/html/
-        src:  "./files/index.html"
+        src: "./files/index.html"
         owner: "apache"
         group: "apache"
-        mode: 0664
+        mode: '0664'
       become: true
