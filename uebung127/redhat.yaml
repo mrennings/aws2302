@@ -1,0 +1,24 @@
+---
+
+# - name: RedHat-based Distros
+#   become: true
+
+- name: Install Apache2 (RedHat)
+  ansible.builtin.dnf:
+    name: "httpd"
+    state: latest # noqa package-latest
+- name: Start Webserver (RedHat)
+  ansible.builtin.service:
+    name: "httpd"
+    state: restarted
+    enabled: true
+- name: Copy web files (RedHat)
+  ansible.builtin.copy:
+    dest: "/var/www/html/index.html"
+    src: "./files/index_redhat.html"
+    owner: "apache"
+    group: "apache"
+    mode: "0664"
+  notify: File copied
+
+...

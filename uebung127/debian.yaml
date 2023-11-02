@@ -1,0 +1,25 @@
+---
+#
+# - name: Debian-based Distros
+#   become: true
+#
+#   tasks:
+- name: Install Apache2 (Debian)
+  ansible.builtin.apt:
+    name: "apache2"
+    state: latest # noqa package-latest
+- name: Start Webserver (Debian)
+  ansible.builtin.service:
+    name: "apache2"
+    state: restarted
+    enabled: true
+- name: Copy web files (Debian)
+  ansible.builtin.copy:
+    dest: "/var/www/html/index.html"
+    src: "./files/index_debian.html"
+    owner: "www-data"
+    group: "www-data"
+    mode: "0664"
+  notify: File copied
+
+...
