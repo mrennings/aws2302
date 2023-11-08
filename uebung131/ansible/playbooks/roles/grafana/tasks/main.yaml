@@ -1,0 +1,40 @@
+---
+- name: Update all packages
+  ansible.builtin.apt:
+    update_cache: true
+    name: "*"
+    state: latest
+
+- name: Add Grafana GPG Key
+  ansible.builtin.apt_key:
+    url: https://apt.grafana.com/gpg.key
+    state: present
+
+- name: Add Grafana Repo
+  ansible.builtin.apt_repository:
+    repo: "deb https://apt.grafana.com stable main"
+    state: present
+
+- name: Install Grafana
+  ansible.builtin.apt:
+    name: "grafana"
+    state: "latest"
+    update_cache: true
+
+- name: Copy Grafana config files
+  ansible.builtin.copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  loop:
+    - src: files/grafana.ini
+      dest: /etc/grafana/grafana.ini
+    - src: files/credentials
+      dest: /usr/share/grafana/.aws/
+
+- name: Start grafana-server
+  ansible.builtin.service:
+    name: grafana-server
+    enabled: true
+    state: started
+
+...
