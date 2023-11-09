@@ -1,0 +1,18 @@
+---
+- name: Update all packages
+  ansible.builtin.apt:
+    update_cache: true
+    name: "*"
+    state: latest # noqa package-latest
+
+- name: Install Node-exporter
+  ansible.builtin.apt:
+    name: "prometheus-node-exporter"
+    state: "latest" # noqa package-latest
+    update_cache: true
+
+- name: Start promeheus server
+  ansible.builtin.service:
+    name: prometheus-node-exporter
+    enabled: true
+    state: restarted

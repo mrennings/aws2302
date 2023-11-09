@@ -1,0 +1,25 @@
+---
+- name: Update all packages
+  ansible.builtin.apt:
+    update_cache: true
+    name: "*"
+    state: latest
+
+- name: Install Prometheus
+  ansible.builtin.apt:
+    name: "prometheus"
+    state: "latest"
+    update_cache: true
+
+- name: Copy Prometheus config file
+  ansible.builtin.copy:
+    src: files/prometheus.yml
+    dest: /etc/prometheus/prometheus.yml
+
+- name: Start promeheus server
+  ansible.builtin.service:
+    name: prometheus
+    enabled: true
+    state: restarted
+
+...
