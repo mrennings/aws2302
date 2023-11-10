@@ -2,7 +2,7 @@
 - name: Update all packages
   ansible.builtin.apt:
     update_cache: true
-    name: "*"
+    name: "*" # noqa package-latest
     state: latest
 
 - name: Add Grafana GPG Key
@@ -18,13 +18,14 @@
 - name: Install Grafana
   ansible.builtin.apt:
     name: "grafana"
-    state: "latest"
+    state: "latest" # noqa package-latest
     update_cache: true
 
 - name: Copy Grafana config files
   ansible.builtin.copy:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
+    mode: "0644"
   loop:
     - src: files/grafana.ini
       dest: /etc/grafana/grafana.ini
@@ -36,5 +37,3 @@
     name: grafana-server
     enabled: true
     state: restarted
-
-...
