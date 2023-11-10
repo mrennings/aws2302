@@ -1,5 +1,5 @@
 ---
-- name: Prometheus
+- name: Monitoring Server (Grafana/Prometheus/AlertManager)
   hosts: Prometheus
   roles:
     - prometheus
