@@ -1,0 +1,6 @@
+---
+- name: AlertManager
+  hosts: Prometheus
+  roles:
+    - alert_manager
+  become: true

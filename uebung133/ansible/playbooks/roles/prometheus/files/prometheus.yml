@@ -18,6 +18,7 @@ alerting:
 
 # Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
 rule_files:
+  - alertmanager_templates/alert_node_down.yaml
   # - "first_rules.yml"
   # - "second_rules.yml"
 
@@ -41,4 +42,4 @@ scrape_configs:
     # If prometheus-node-exporter is installed, grab stats about the local
     # machine by default.
     static_configs:
-      - targets: ['localhost:9100', '3.70.174.194:9100']
+      - targets: ['localhost:9100', '35.158.139.11:9100']

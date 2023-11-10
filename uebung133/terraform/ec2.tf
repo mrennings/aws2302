@@ -76,6 +76,14 @@ resource "aws_security_group" "allow_ssh_grafana" {
   }
 
   ingress {
+    description = "Alertmanager inbound"
+    from_port   = 9093
+    to_port     = 9093
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
     description = "Node-Exporter inbound"
     from_port   = 9100
     to_port     = 9100
