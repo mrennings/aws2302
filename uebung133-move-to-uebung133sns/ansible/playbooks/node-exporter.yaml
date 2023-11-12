@@ -1,0 +1,6 @@
+---
+- name: Node_Exporter
+  hosts: NodeExporter
+  roles:
+    - NodeExporter
+  become: true

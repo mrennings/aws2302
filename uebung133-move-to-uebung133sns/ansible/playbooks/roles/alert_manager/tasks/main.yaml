@@ -1,0 +1,11 @@
+---
+- name: Update all packages
+  ansible.builtin.apt:
+    update_cache: true
+    name: "*"
+    state: latest # noqa package-latest
+
+- name: Install Prometheus Alert Manager
+  ansible.builtin.apt:
+    name: "prometheus-alertmanager"
+    state: "latest" # noqa package-latest
