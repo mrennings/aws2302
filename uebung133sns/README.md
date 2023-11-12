@@ -59,3 +59,17 @@ Logge dich in der laufenden Grafana Instanz ein. Füge nun Prometheus als Datenq
 Hilfreiche Links:
 
 - <https://prometheus.io/docs/visualization/grafana/>
+
+## AWS-SNS-Anbindung
+
+### Struktur
+
+Aufbauend auf der Terraform-Struktur der Übung 133 soll eine Anbindung an AWS SNS für das Alerting erfolgen.
+
+```mermaid
+flowchart LR
+    prom([Prometheus]) --> EC2[EC2:\nAlertManager] --> SNS{{SNS}}
+    EC2 o--o IAM1[/IAM:\nInstance-Role\nInstance-Profile/]
+    EC2 o--o IAM2[/alertmanager.yml:\nTopic-ARN/]
+    SNS o--o IAM3[/IAM:\nTopic Policy/]
+```

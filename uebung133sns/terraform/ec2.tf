@@ -20,8 +20,9 @@ resource "aws_instance" "U132_prometheus" {
   instance_type          = var.instance_type
   key_name               = "aws_mr"
   vpc_security_group_ids = [aws_security_group.allow_ssh_grafana.id]
+  iam_instance_profile   = aws_iam_instance_profile.inst_prof.name
   tags = {
-    Name = "U131 Prometheus"
+    Name = "U133 Prometheus"
   }
 }
 
@@ -33,7 +34,7 @@ resource "aws_instance" "U132_nodeexporter" {
   key_name               = "aws_mr"
   vpc_security_group_ids = [aws_security_group.allow_ssh_grafana.id]
   tags = {
-    Name = "U132 Node Exporter"
+    Name = "U133 Node Exporter"
   }
 }
 
@@ -104,4 +105,49 @@ resource "aws_security_group" "allow_ssh_grafana" {
   tags = {
     Name = "allow ssh/grafana"
   }
+}
+
+
+
+
+resource "aws_iam_role" "ec2_sns" {
+  name = "EC2_SNS"
+  assume_role_policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": "sts:AssumeRole",
+      "Principal": {
+        "Service": "ec2.amazonaws.com"
+      },
+      "Effect": "Allow",
+      "Sid": ""
+    }
+  ]
+}
+EOF
+}
+
+resource "aws_iam_role_policy" "ec2_sns_all" {
+  name = "EC2_SNS_ALL"
+  role = aws_iam_role.ec2_sns.id
+  policy = jsonencode({
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "Stmt1699785788808",
+          "Action": [
+            "sns:Publish"
+          ],
+          "Effect": "Allow",
+          "Resource": "${aws_sns_topic.AlertManager.arn}"
+        }
+      ]
+    })
+}
+
+resource "aws_iam_instance_profile" "inst_prof" {
+  name = "ec2_sns_instance_profile"
+  role = "${aws_iam_role.ec2_sns.name}"
 }
