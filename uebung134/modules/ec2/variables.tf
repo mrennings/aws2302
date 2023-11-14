@@ -12,3 +12,13 @@ variable "instance_profile" {
   type    = string
   default = ""
 }
+
+variable "user_data" {
+  type = string
+  default = ""
+}
+
+variable "sshkey" {
+  type = string
+  default = ""
+}

@@ -26,4 +26,7 @@ resource "aws_instance" "ec2_instance" {
   security_groups = [aws_security_group.ec2_sg.name]
 
   iam_instance_profile = var.instance_profile == "" ? null : var.instance_profile
+
+  user_data = var.user_data == "" ? null : var.user_data
+  key_name = var.sshkey != "" ? var.sshkey : null
 }
