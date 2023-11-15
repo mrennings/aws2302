@@ -1,0 +1,30 @@
+---
+- name: Update all packages
+  ansible.builtin.apt:
+    update_cache: true
+    name: "*"
+    state: latest # noqa package-latest
+
+- name: Install Prometheus
+  ansible.builtin.apt:
+    name: "prometheus"
+    state: "latest" # noqa package-latest
+
+- name: Copy Prometheus config files
+  ansible.builtin.copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: '0644'
+  loop:
+    - src: files/prometheus.yml
+      dest: /etc/prometheus/prometheus.yml
+    - src: files/alert_node_down.yaml
+      dest: /etc/prometheus/alertmanager_templates/
+
+
+- name: Start promeheus server
+  ansible.builtin.service:
+    name: prometheus
+    enabled: true
+    state: restarted
+

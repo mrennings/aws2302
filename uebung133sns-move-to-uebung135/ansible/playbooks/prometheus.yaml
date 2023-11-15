@@ -1,0 +1,6 @@
+---
+- name: Prometheus
+  hosts: Prometheus
+  roles:
+    - prometheus
+  become: true

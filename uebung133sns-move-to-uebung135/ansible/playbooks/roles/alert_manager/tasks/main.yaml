@@ -1,0 +1,17 @@
+---
+- name: Update all packages
+  ansible.builtin.apt:
+    update_cache: true
+    name: "*"
+    state: latest # noqa package-latest
+
+- name: Install Prometheus AlertManager
+  ansible.builtin.apt:
+    name: "prometheus-alertmanager"
+    state: "latest" # noqa package-latest
+
+- name: Copy AlertManager config files
+  ansible.builtin.copy:
+    src: files/alertmanager.yml
+    dest: /etc/prometheus/alertmanager.yml
+    mode: '0644'
