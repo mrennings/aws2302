@@ -1,6 +1,7 @@
 rules:
-  comments:
-    min-spaces-from-content: 1 # prettier compatibility
+    comments:
+        min-spaces-from-content: 1 # prettier compatibility
 
-skip-list:
+skip_list:
     - yaml[empty-lines]
+    - name[template]

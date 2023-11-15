@@ -2,6 +2,12 @@ resource "aws_sns_topic" "AlertManager" {
   name = "AlertManager_SNS"
 }
 
+resource "aws_sns_topic_subscription" "prom_alerts_email_sub" {
+  topic_arn = aws_sns_topic.AlertManager.arn
+  protocol  = "email"
+  endpoint  = "markus.rennings@docc.techstarter.de"
+}
+
 resource "aws_sns_topic_policy" "sns_am_pol" {
   arn = aws_sns_topic.AlertManager.arn
   policy = data.aws_iam_policy_document.sns_topic_policy.json

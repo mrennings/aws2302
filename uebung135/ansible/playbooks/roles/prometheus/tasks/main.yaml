@@ -5,26 +5,29 @@
     name: "*"
     state: latest # noqa package-latest
 
-- name: Install Prometheus
+- name: "Install {{ service }}"
   ansible.builtin.apt:
-    name: "prometheus"
+    name: "{{ service }}"
     state: "latest" # noqa package-latest
 
-- name: Copy Prometheus config files
+- name: "Copy {{ service }} alert rules"
   ansible.builtin.copy:
-    src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
+    src: files/alert_node_down.yaml
+    dest: "{{ prometheus_config_path }}/alertmanager_templates/"
     mode: '0644'
-  loop:
-    - src: files/prometheus.yml
-      dest: /etc/prometheus/prometheus.yml
-    - src: files/alert_node_down.yaml
-      dest: /etc/prometheus/alertmanager_templates/
+  notify:
+    - Restart nginx
 
+- name: "Copy {{ service }} config"
+  ansible.builtin.template:
+    src: templates/prometheus.yml.j2
+    dest: "{{ prometheus_config_path }}/prometheus.yml"
+    mode: "0644"
+  notify:
+    - Restart nginx
 
-- name: Start promeheus server
+- name: "Start {{ service }} server"
   ansible.builtin.service:
-    name: prometheus
+    name: "{{ service }}"
     enabled: true
-    state: restarted
-
+    state: started

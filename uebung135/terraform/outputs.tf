@@ -1,15 +1,12 @@
-output "Prometheus_IP" {
-  value = aws_instance.U132_prometheus.public_ip
-}
-
-output "Node_Exporter_IP" {
-  value = aws_instance.U132_nodeexporter.public_ip
+output "ec2_ip" {
+  description = "EC2 IP"
+  value       = module.ec2_module.ec2_ip
 }
 
 output "SNS_topic_arn" {
   value = aws_sns_topic.AlertManager.arn
 }
 
-output "ROLE_ARN" {
-  value = aws_iam_role.ec2_sns.arn
-}
+# output "ROLE_ARN" {
+#   value = aws_iam_role.ec2_sns.arn
+# }
