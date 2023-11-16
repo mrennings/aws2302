@@ -24,7 +24,7 @@ route:
 receivers:
   - name: 'sns'
     sns_configs:
-    - topic_arn: 'arn:aws:sns:eu-central-1:898860150874:AlertManager_SNS'
+    - topic_arn: "{{ sns_topic_arn }}"
       api_url: 'https://sns.eu-central-1.amazonaws.com'
       sigv4:
         region: 'eu-central-1'

@@ -5,32 +5,33 @@
     name: "*" # noqa package-latest
     state: latest
 
-- name: Add Grafana GPG Key
+- name: Add {{ service }} GPG Key
   ansible.builtin.apt_key:
     url: https://apt.grafana.com/gpg.key
     state: present
 
-- name: Add Grafana Repo
+- name: Add {{ service }} Repo
   ansible.builtin.apt_repository:
     repo: "deb https://apt.grafana.com stable main"
     state: present
 
-- name: Install Grafana
+- name: "Install {{ service }}"
   ansible.builtin.apt:
-    name: "grafana"
+    name: "{{ service | lower }}"
     state: "latest" # noqa package-latest
     update_cache: true
 
-- name: Copy Grafana config files
+- name: Copy {{ service }} config files
   ansible.builtin.copy:
-    src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
     mode: "0644"
-  loop:
-    - src: files/grafana.ini
-      dest: /etc/grafana/grafana.ini
-    - src: files/credentials
-      dest: /usr/share/grafana/.aws/
+    src: files/grafana.ini
+    dest: /etc/grafana/grafana.ini
+
+- name: Installing AWS credentials
+  ansible.builtin.template:
+    src: templates/credentials.j2
+    dest: /usr/share/grafana/.aws/
+    mode: "0640"
 
 - name: Start grafana-server
   ansible.builtin.service:

@@ -11,7 +11,7 @@
     state: "latest" # noqa package-latest
 
 - name: Copy AlertManager config files
-  ansible.builtin.copy:
-    src: files/alertmanager.yml
+  ansible.builtin.template:
+    src: files/alertmanager.yml.j2
     dest: /etc/prometheus/alertmanager.yml
     mode: '0644'
